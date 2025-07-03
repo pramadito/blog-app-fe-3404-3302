@@ -10,6 +10,7 @@ import { Trash } from "lucide-react";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import * as Yup from "yup";
+import useCreateBlog from "./_hooks/useCreateBlog";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
@@ -41,8 +42,10 @@ const Write = () => {
     setFieldValue("thumbnail", null);
   };
 
+  const { mutateAsync: createBlog, isPending } = useCreateBlog();
+
   return (
-    <main className="container mx-auto px-4">
+    <main className="container mx-auto px-4 pb-20">
       <Formik
         initialValues={{
           title: "",
@@ -52,7 +55,9 @@ const Write = () => {
           thumbnail: null,
         }}
         validationSchema={validationSchema}
-        onSubmit={async (values) => {}}
+        onSubmit={async (values) => {
+          await createBlog(values);
+        }}
       >
         {({ setFieldValue }) => (
           <Form className="space-y-4">
@@ -142,6 +147,12 @@ const Write = () => {
                   />
                 </div>
               )}
+            </div>
+
+            <div className="flex justify-end">
+              <Button type="submit" disabled={isPending}>
+                {isPending ? "Loading" : "Submit"}
+              </Button>
             </div>
           </Form>
         )}

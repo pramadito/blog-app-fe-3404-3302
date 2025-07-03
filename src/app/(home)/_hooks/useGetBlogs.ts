@@ -6,7 +6,9 @@ const useGetBlogs = () => {
   return useQuery({
     queryKey: ["blogs"],
     queryFn: async () => {
-      const { data } = await axiosInstance.get<Blog[]>("/api/data/Blogs");
+      const { data } = await axiosInstance.get<Blog[]>(
+        "/api/data/Blogs?sortBy=%60created%60%20desc"
+      );
       return data;
     },
   });
