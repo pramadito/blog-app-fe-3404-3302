@@ -11,6 +11,7 @@ import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import * as Yup from "yup";
 import useCreateBlog from "./_hooks/useCreateBlog";
+import { AuthGuard } from "@/hoc/AuthGuard";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
@@ -161,4 +162,4 @@ const Write = () => {
   );
 };
 
-export default Write;
+export default AuthGuard(Write);
