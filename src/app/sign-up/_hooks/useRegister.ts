@@ -15,7 +15,7 @@ const useRegister = () => {
 
   return useMutation({
     mutationFn: async (payload: Payload) => {
-      const { data } = await axiosInstance.post("/api/users/register", payload);
+      const { data } = await axiosInstance.post("/auth/register", payload);
       return data;
     },
     onSuccess: () => {
