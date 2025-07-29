@@ -4,9 +4,15 @@ import { lato } from "@/lib/fonts";
 import { useAuthStore } from "@/stores/auth";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { useSession, signOut } from "next-auth/react";
+import { log } from "console";
 
 const Navbar = () => {
-  const { user, clearAuth } = useAuthStore();
+  const session = useSession();
+
+  const logout = () => {
+    signOut();
+  };
 
   return (
     <nav className="container mx-auto p-4 flex justify-between items-center ">
@@ -16,10 +22,10 @@ const Navbar = () => {
 
       <div className="flex items-center gap-4">
         <Link href="/">Home</Link>
-        {user ? (
+        {session.data?.user ? (
           <>
             <Link href="/write">Write</Link>
-            <Button variant="destructive" onClick={clearAuth}>
+            <Button variant="destructive" onClick={logout}>
               Logout
             </Button>
           </>
