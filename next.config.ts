@@ -6,8 +6,17 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
         hostname: "spotonplants-us.backendless.app",
       },
+      {
+        protocol: "https",
+        hostname: "plus.unsplash.com",
+      }
+      
     ],
   },
 };
