@@ -11,6 +11,7 @@ import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import * as Yup from "yup";
 import useCreateBlog from "../_hooks/useCreateBlog";
+import { useSession } from "next-auth/react";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
@@ -22,7 +23,9 @@ const validationSchema = Yup.object().shape({
 
 const WritePage = () => {
   const [selectedImage, setSelectedImage] = useState<string>("");
+  const session = useSession()
 
+  console.log(session)
   const onChangeThumbnail = (
     e: ChangeEvent<HTMLInputElement>,
     setFieldValue: (field: string, value: any) => void

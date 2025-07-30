@@ -1,11 +1,11 @@
-import {User} from "./user"
+import { User } from "./user";
 
-interface LoginPayload extends User{
-    accessToken: string;
+interface LoginPayload extends User {
+  accessToken: string;
 }
 
-declare module "next-auth"{
-    interface Session{
-        user:LoginPayload
-    }
+declare module "next-auth" {
+  interface Session {
+    user: LoginPayload;
+  }
 }
